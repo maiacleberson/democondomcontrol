@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header('Editar Morador')}"></head>
+<body>
+    <div th:replace="~{fragments/header :: navbar}"></div>
+    <div class="container">
+        <h1 class="my-4">Editar Morador</h1>
+        <form th:action="@{/moradores/{id}(id=${morador.id})}" th:object="${morador}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+            <div class="form-group">
+                <label>Nome:</label>
+                <input type="text" class="form-control" th:field="*{nome}" th:errorclass="is-invalid"/>
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+            </div>
+            <div class="form-group">
+                <label>Apartamento:</label>
+                <input type="text" class="form-control" th:field="*{apartamento}" th:errorclass="is-invalid"/>
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('apartamento')}" th:errors="*{apartamento}"></div>
+            </div>
+            <div class="form-group">
+                <label>Bloco:</label>
+                <input type="text" class="form-control" th:field="*{bloco}" th:errorclass="is-invalid"/>
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('bloco')}" th:errors="*{bloco}"></div>
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" class="form-control" th:field="*{email}" th:errorclass="is-invalid"/>
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+            </div>
+            <div class="form-group">
+                <label>Condomínio:</label>
+                <select class="form-control" th:field="*{condominio}" th:errorclass="is-invalid">
+                    <option value="">Selecione um condomínio</option>
+                    <option th:each="cond : ${condominios}" 
+                            th:value="${cond.id}"
+                            th:text="${cond.nome}">Nome do Condomínio</option>
+                </select>
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('condominio')}" th:errors="*{condominio}"></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="/moradores" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

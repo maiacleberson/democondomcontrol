@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header('Condominios')}"></head>
+<body>
+    <div th:replace="~{fragments/header :: navbar}"></div>
+    <div class="container">
+        <h1 class="my-4">Condominios</h1>
+        <a href="/condominios/new" class="btn btn-primary mb-3">Novo Condominio</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Endereço</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="condominio : ${condominios}">
+                    <td th:text="${condominio.id}"></td>
+                    <td th:text="${condominio.nome}"></td>
+                    <td th:text="${condominio.endereco}"></td>
+                    <td>
+                        <a th:href="@{/condominios/edit/{id}(id=${condominio.id})}" class="btn btn-sm btn-warning">Editar</a>
+                        <a th:href="@{/condominios/delete/{id}(id=${condominio.id})}" class="btn btn-sm btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header('Moradores')}"></head>
+<body>
+    <div th:replace="~{fragments/header :: navbar}"></div>
+    <div class="container">
+        <h1 class="my-4">Moradores</h1>
+        <a href="/moradores/new" class="btn btn-primary mb-3">Novo Morador</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Apartamento</th>
+                    <th>Bloco</th>
+                    <th>Email</th>
+                    <th>Condomínio</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="morador : ${moradores}">
+                    <td th:text="${morador.id}"></td>
+                    <td th:text="${morador.nome}"></td>
+                    <td th:text="${morador.apartamento}"></td>
+                    <td th:text="${morador.bloco}"></td>
+                    <td th:text="${morador.email}"></td>
+                    <td th:text="${morador.condominio?.nome}"></td>
+                    <td>
+                        <a th:href="@{/moradores/edit/{id}(id=${morador.id})}" class="btn btn-sm btn-warning">Editar</a>
+                        <a th:href="@{/moradores/delete/{id}(id=${morador.id})}" class="btn btn-sm btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
